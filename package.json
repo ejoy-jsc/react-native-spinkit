@@ -27,7 +27,7 @@
 			"prelink": "node ./node_modules/react-native-spinkit/scripts/rnpm-prelink.js"
 		}
 	},
-  "dependencies": {
+  "peerDependencies": {
     "prop-types": "^15.5.8"
   }
 }

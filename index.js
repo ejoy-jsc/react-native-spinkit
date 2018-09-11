@@ -1,15 +1,14 @@
-import React from 'react'
-import ReactNative from 'react-native'
 import PropTypes from 'prop-types';
-
-var {
+import React from 'react'
+import {
 	NativeModules,
 	processColor,
 	requireNativeComponent,
 	View
-} = ReactNative;
+} from 'react-native'
 
-var RNSpinkit = null;
+
+let RNSpinkit = null;
 
 class Spinkit extends React.Component {
 
@@ -43,22 +42,29 @@ class Spinkit extends React.Component {
 
 	render() {
 		if (!this.props.isVisible) return <View/>;
+		const { size, type, style, color } = this.props;
 
-		var size = {height: this.props.size, width: this.props.size};
 
 		// In order to handle all the color specifications allowed in React Native
 		// as a whole, we need to call processColor here, and can pass in the
 		// resulting number directly. RCTConvert will be called on iOS to parse
 		// into #AARRGGBB form; on Android, this int can be used directly for
 		// setting the color.
-		var colorNumber = processColor(this.props.color);
+		let colorNumber = processColor(color);
 
 		return (
 			<RNSpinkit
-				type={String(this.props.type)}
-				size={parseInt(this.props.size)}
+				type={String(type)}
+				size={parseInt(size)}
 				color={colorNumber}
-				style={[size, this.props.style]}/>
+				style={[
+					{
+						height: size, 
+						width: size,
+					}, 
+					style
+					]
+					}/>
 		);
 	}
 
